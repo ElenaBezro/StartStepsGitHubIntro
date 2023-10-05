@@ -1,3 +1,5 @@
+import java.util.List;
+
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
 // then press Enter. You can now see whitespace characters in your code.
 public class Main {
@@ -12,6 +14,22 @@ public class Main {
             // Press Ctrl+D to start debugging your code. We have set one breakpoint
             // for you, but you can always add more by pressing Cmd+F8.
             System.out.println("i = " + i);
+        }
+        ArtistImplementation artist1 = new ArtistImplementation("Taylor Swift");
+        ArtistImplementation artist2 = new ArtistImplementation("Ed Sheeran");
+        ArtistImplementation artist3 = new ArtistImplementation("Adele");
+        ArtistImplementation artist4 = new ArtistImplementation("Beyonce");
+
+        ArtistsImplementation artists = new ArtistsImplementation();
+
+        artists.add(artist1);
+        artists.add(artist2);
+        artists.add(artist3);
+        artists.add(artist4);
+
+        List<Artist> searchResult = artists.search("swif");
+        for (Artist artist : searchResult) {
+            System.out.println("Artist: " + artist.getName());
         }
     }
 }
