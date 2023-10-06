@@ -15,10 +15,10 @@ public class Main {
             // for you, but you can always add more by pressing Cmd+F8.
             System.out.println("i = " + i);
         }
-        ArtistImplementation artist1 = new ArtistImplementation("Taylor Swift");
-        ArtistImplementation artist2 = new ArtistImplementation("Ed Sheeran");
-        ArtistImplementation artist3 = new ArtistImplementation("Adele");
-        ArtistImplementation artist4 = new ArtistImplementation("Beyonce");
+        ArtistImplementation artist1 = new ArtistImplementation("Taylor Swift", 30);
+        ArtistImplementation artist2 = new ArtistImplementation("Ed Sheeran", 15);
+        ArtistImplementation artist3 = new ArtistImplementation("Adele", 25);
+        ArtistImplementation artist4 = new ArtistImplementation("Beyonce", 20);
 
         ArtistsImplementation artists = new ArtistsImplementation();
 
@@ -31,5 +31,7 @@ public class Main {
         for (Artist artist : searchResult) {
             System.out.println("Artist: " + artist.getName());
         }
+
+        artists.printArtists();
     }
 }

@@ -9,9 +9,15 @@ public class ArtistsImplementation implements Searchable {
 
     // private Artist artist = new Artist();
     private Artist[] artists = new ArtistImplementation[4]; // remember the references
-
+    List<ArtistImplementation> artists2 = new ArrayList<>();
     private int count;
 
+    public void add2(ArtistImplementation artist) {
+        artists2.add(artist);
+    }
+    public void remove2(ArtistImplementation artist) {
+        artists2.remove(artist);
+    }
     public void add(ArtistImplementation artist) {
         artists[count++] = artist;
     }
@@ -34,5 +40,15 @@ public class ArtistsImplementation implements Searchable {
             System.out.println("Artist list is empty");
         }
         return searchResult;
+    }
+
+    public void printArtists () {
+        StringBuilder result = new StringBuilder();
+        for (Artist artist: artists) {
+            String formattedArtist = String.format("%s,%d\n", artist.getName(), artist.getAlbumsCount());
+            result.append(formattedArtist);
+        }
+        System.out.println(result.toString());
+
     }
 }
