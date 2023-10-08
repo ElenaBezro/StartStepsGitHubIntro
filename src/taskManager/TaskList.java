@@ -10,7 +10,6 @@ public class TaskList {
         taskList.add(task);
     }
 
-    //Why pass whole Task? mb pass only title
     public void removeTask(String title) {
         boolean isRemoved = taskList.removeIf(task -> {
             return task.getTitle().equals(title);
@@ -19,7 +18,7 @@ public class TaskList {
         String message = isRemoved ? "Task removed" : "Invalid title input";
         System.out.println(message);
 
-        //Another implementation
+        //Another implementation:
 //        var tasksToRemove = new ArrayList<Task>();
 //        for (Task task: taskList) {
 //            if (task.getTitle().equals(title)) {
@@ -39,7 +38,7 @@ public class TaskList {
     }
 
     public void editTask(String oldTitle, String title, String description, String priority) {
-        // This code will change all tasks with the same title ==> we need to somehow create unique tasks (uuid?)
+        // TODO: This code will change all tasks with the same title ==> we need to somehow create unique tasks (uuid?)
         int count = 0;
         for (Task task: taskList) {
             if (task.getTitle().equals(oldTitle)) {

@@ -5,7 +5,7 @@ public class Task implements Taskable {
     private String description;
     private String priority;
 
-    //use Enum for status
+    //TODO: use Enum for status
     private String status;
 
     public Task(final String title, final String description, final String priority, final String status) {
