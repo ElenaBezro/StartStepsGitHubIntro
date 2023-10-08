@@ -8,43 +8,51 @@ public class Task implements Taskable {
     //TODO: use Enum for status
     private String status;
 
-    public Task(final String title, final String description, final String priority, final String status) {
+    public Task(String title, String description, String priority, String status) {
+        if (title.trim().equals("") ||
+                description.trim().equals("") ||
+                priority.trim().equals("") ||
+                status.trim().equals("")) {
+            System.out.println("Empty values are not allowed");
+            return;
+        }
         this.title = title;
         this.description = description;
         this.priority = priority;
         this.status = status;
     }
 
-    public void setTitle(final String title) {
-        if (title.equals("")) {
+    public void setTitle(String title) {
+        if (title.trim().equals("")) {
             System.out.println("Empty values are not allowed");
             return;
         }
         this.title = title;
     }
 
-    public void setDescription(final String description) {
-        if (description.equals("")) {
+    public void setDescription(String description) {
+        if (description.trim().equals("")) {
             System.out.println("Empty values are not allowed");
             return;
         }
         this.description = description;
     }
 
-    public void setPriority(final String priority) {
-        if (priority.equals("")) {
+    public void setPriority(String priority) {
+        if (priority.trim().equals("")) {
             System.out.println("Empty values are not allowed");
             return;
         }
         this.priority = priority;
     }
 
-    public void setStatus(final String status) {
-        if (status.length() > 1) {
-            this.status = status;
+    public void setStatus(String status) {
+        if (status.trim().equals("")) {
+            System.out.println("Empty values are not allowed");
             return;
         }
-        System.out.println("Status should contain at least 2 characters");    }
+        this.status = status;
+    }
 
     public String getTitle() {
         return this.title;
@@ -64,7 +72,7 @@ public class Task implements Taskable {
 
     @Override
     public void changeStatus(String newStatus) {
-            setStatus(newStatus);
+        setStatus(newStatus);
     }
 
     @Override

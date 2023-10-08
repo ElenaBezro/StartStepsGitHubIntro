@@ -32,6 +32,8 @@ public class TaskList {
     public void printTasks() {
         StringBuilder list = new StringBuilder();
         for (Task task: taskList) {
+            //TODO: implement using join()
+            //System.out.println(task.toString());
            list.append(task.toString()).append(System.lineSeparator());
         }
         System.out.println(list);
@@ -39,6 +41,7 @@ public class TaskList {
 
     public void editTask(String oldTitle, String title, String description, String priority) {
         // TODO: This code will change all tasks with the same title ==> we need to somehow create unique tasks (uuid?)
+        // TODO: bug! count will increase even if task.editTask() will not be successful(empty values have not been validated)
         int count = 0;
         for (Task task: taskList) {
             if (task.getTitle().equals(oldTitle)) {
