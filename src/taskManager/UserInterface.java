@@ -3,14 +3,16 @@ package taskManager;
 import java.util.*;
 
 public class UserInterface {
-    Scanner sc = new Scanner(System.in);
-    TaskList taskList;
+    private Scanner sc = new Scanner(System.in);
+    private TaskList taskList;
+    private Map<String, Runnable> commandMap;
     public static final String[] TASK_FIELDS = {"title", "description", "priority", "status"};
     public static final String[] TASK_FIELDS_OMIT_STATUS = Arrays.copyOf(TASK_FIELDS, TASK_FIELDS.length - 1);
 
 
     public UserInterface(TaskList taskList) {
         this.taskList = taskList;
+        commandHandler();
     }
 
     public void startUI() {
@@ -30,30 +32,24 @@ public class UserInterface {
         System.out.println("exit - exit the application");
     }
 
+    public void commandHandler() {
+        commandMap = new HashMap<>();
+        commandMap.put("1", this::addTask);
+        commandMap.put("2", this::editTask);
+        commandMap.put("3", this::removeTask);
+        commandMap.put("4", this::printTasksList);
+        commandMap.put("5", this::changeStatus);
+        commandMap.put("exit", this::exit);
+    }
+
     public void handleInput() {
-        // TODO: implement map with handlers
         String command = sc.nextLine();
-        switch (command) {
-            case "1":
-                addTask();
-                break;
-            case "2":
-                editTask();
-                break;
-            case "3":
-                removeTask();
-                break;
-            case "4":
-                printTasksList();
-                break;
-            case "5":
-                changeStatus();
-                break;
-            case "exit":
-                exit();
-                break;
-            default:
-                System.out.println("Invalid command");
+        Runnable handler = commandMap.get(command);
+        if (handler != null) {
+            handler.run();
+        }
+        else {
+            System.out.println("Invalid command");
         }
     }
 
