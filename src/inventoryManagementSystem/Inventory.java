@@ -12,7 +12,24 @@ public class Inventory {
         itemList.add(item);
     }
 
-    public void removeItems(String id, int quantityToRemove) throws InsufficientStockException {
+    public Item getItemById(String id) {
+        for (Item item: itemList) {
+            if (item.getId().equals(id)) {
+                return item;
+            }
+        }
+        return null;
+    }
+
+    public void removeItem(String id) throws InsufficientStockException {
+        Item itemToRemove = getItemById(id);
+
+        if (itemToRemove == null) {
+            throw new InsufficientStockException("Not in stock.");
+        }
+        itemList.remove(itemToRemove);
+    }
+    public void decreaseQuantity(String id, int quantityToRemove) throws InsufficientStockException {
         for (Item item: itemList) {
             if (item.getId().equals(id)) {
                 if (item.getQuantity() < quantityToRemove) {
