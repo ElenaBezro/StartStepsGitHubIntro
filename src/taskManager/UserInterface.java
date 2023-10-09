@@ -1,22 +1,20 @@
 package taskManager;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class UserInterface {
     Scanner sc = new Scanner(System.in);
     TaskList taskList;
     public static final String[] TASK_FIELDS = {"title", "description", "priority", "status"};
+    public static final String[] TASK_FIELDS_OMIT_STATUS = Arrays.copyOf(TASK_FIELDS, TASK_FIELDS.length - 1);
 
 
     public UserInterface(TaskList taskList) {
         this.taskList = taskList;
     }
 
-    public void startUI(){
-        while(true){
+    public void startUI() {
+        while (true) {
             printCommandOptions();
             handleInput();
         }
@@ -60,8 +58,8 @@ public class UserInterface {
     }
 
     public void addTask() {
-        List<String> taskFieldValues =  new ArrayList<String>(TASK_FIELDS.length);
-        for (String field: TASK_FIELDS) {
+        List<String> taskFieldValues = new ArrayList<String>(TASK_FIELDS.length);
+        for (String field : TASK_FIELDS) {
             while (true) {
                 System.out.println(String.format("Enter task %s: ", field));
                 var input = sc.nextLine();
@@ -73,10 +71,12 @@ public class UserInterface {
         }
 
         try {
-            Task task = new Task(taskFieldValues.get(0), taskFieldValues.get(1), taskFieldValues.get(2), taskFieldValues.get(3));
+            Task task = new Task(taskFieldValues.get(0),
+                    taskFieldValues.get(1),
+                    taskFieldValues.get(2),
+                    taskFieldValues.get(3));
             taskList.addTask(task);
-        }
-        catch(NotAllowedEmptyFields e) {
+        } catch (NotAllowedEmptyFields e) {
             System.out.println(e.toString());
         }
 
@@ -86,17 +86,29 @@ public class UserInterface {
     public void editTask() {
         System.out.println("Enter title of the task that you want to change: ");
         String oldTitle = sc.nextLine();
-        //TODO: check if the task exists
 
-        //TODO: validate input values
-        System.out.println("Enter new task title: ");
-        String title = sc.nextLine();
-        System.out.println("Enter new task description: ");
-        String description = sc.nextLine();
-        System.out.println("Enter new task priority: ");
-        String priority = sc.nextLine();
+        boolean isContaines = taskList.containsTask(oldTitle);
+        if (!isContaines) {
+            System.out.println("Invalid title input");
+            return;
+        }
 
-        taskList.editTask(oldTitle, title, description, priority);
+        List<String> newTaskFieldValues = new ArrayList<>(TASK_FIELDS_OMIT_STATUS.length);
+        for (String field : TASK_FIELDS_OMIT_STATUS) {
+            while (true) {
+                System.out.println(String.format("Enter new task %s: ", field));
+                var input = sc.nextLine();
+                if (!input.trim().equals("")) {
+                    newTaskFieldValues.add(input);
+                    break;
+                }
+            }
+        }
+
+        taskList.editTask(oldTitle,
+                newTaskFieldValues.get(0),
+                newTaskFieldValues.get(1),
+                newTaskFieldValues.get(2));
     }
 
     public void removeTask() {

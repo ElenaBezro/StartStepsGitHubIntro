@@ -63,4 +63,13 @@ public class TaskList {
         String message =  (count != 0) ? "Status changed" : "Invalid title input";
         System.out.println(message);
     }
+
+    public boolean containsTask(String title){
+        for(Task task: taskList) {
+            if (task.getTitle().equals(title)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
