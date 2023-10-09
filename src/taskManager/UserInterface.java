@@ -76,7 +76,7 @@ public class UserInterface {
                     taskFieldValues.get(2),
                     taskFieldValues.get(3));
             taskList.addTask(task);
-        } catch (NotAllowedEmptyFields e) {
+        } catch (EmptyFieldsException e) {
             System.out.println(e.toString());
         }
 

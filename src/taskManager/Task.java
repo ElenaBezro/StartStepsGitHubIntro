@@ -8,12 +8,12 @@ public class Task implements Taskable {
     //TODO: use Enum for status
     private String status;
 
-    public Task(String title, String description, String priority, String status) throws NotAllowedEmptyFields {
+    public Task(String title, String description, String priority, String status) throws EmptyFieldsException {
         if (title.trim().equals("") ||
                 description.trim().equals("") ||
                 priority.trim().equals("") ||
                 status.trim().equals("")) {
-            throw new NotAllowedEmptyFields("Empty values are not allowed");
+            throw new EmptyFieldsException("Empty values are not allowed");
         }
         this.title = title;
         this.description = description;
