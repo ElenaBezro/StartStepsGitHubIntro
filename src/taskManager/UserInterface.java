@@ -72,8 +72,15 @@ public class UserInterface {
             }
         }
 
-        Task task = new Task(taskFieldValues.get(0), taskFieldValues.get(1), taskFieldValues.get(2), taskFieldValues.get(3));
-        taskList.addTask(task);
+        try {
+            Task task = new Task(taskFieldValues.get(0), taskFieldValues.get(1), taskFieldValues.get(2), taskFieldValues.get(3));
+            taskList.addTask(task);
+        }
+        catch(NotAllowedEmptyFields e) {
+            System.out.println(e.toString());
+        }
+
+
     }
 
     public void editTask() {
