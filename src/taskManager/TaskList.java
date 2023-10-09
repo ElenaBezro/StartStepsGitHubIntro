@@ -39,9 +39,8 @@ public class TaskList {
         System.out.println(list);
     }
 
-    public void editTask(String oldTitle, String title, String description, String priority) {
+    public int editTask(String oldTitle, String title, String description, String priority) {
         // TODO: This code will change all tasks with the same title ==> we need to somehow create unique tasks (uuid?)
-        // TODO: bug! count will increase even if task.editTask() will not be successful(empty values have not been validated)
         int count = 0;
         for (Task task: taskList) {
             if (task.getTitle().equals(oldTitle)) {
@@ -49,8 +48,7 @@ public class TaskList {
                 count++;
             }
         }
-        String message =  (count != 0) ? "Task edited" : "Invalid title input";
-        System.out.println(message);
+        return count;
     }
     public void changeStatus(String title, String status) {
         int count = 0;

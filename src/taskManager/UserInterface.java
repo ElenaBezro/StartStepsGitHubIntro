@@ -79,8 +79,6 @@ public class UserInterface {
         } catch (EmptyFieldsException e) {
             System.out.println(e.toString());
         }
-
-
     }
 
     public void editTask() {
@@ -105,10 +103,12 @@ public class UserInterface {
             }
         }
 
-        taskList.editTask(oldTitle,
+        int editedTasksCount = taskList.editTask(oldTitle,
                 newTaskFieldValues.get(0),
                 newTaskFieldValues.get(1),
                 newTaskFieldValues.get(2));
+        String message =  (editedTasksCount > 0) ? "Task edited" : "Failed";
+        System.out.println(message);
     }
 
     public void removeTask() {
