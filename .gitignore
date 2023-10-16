@@ -1,8 +1,8 @@
 .DS_Store
 .idea/*
 
-# Compiled class file
-*.class
+# Compiled files
+target/*
 
 # Log file
 *.log
